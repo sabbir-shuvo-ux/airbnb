@@ -35,15 +35,18 @@ const BookingWedget = ({ singlePlace }) => {
 
       if (!user) return;
 
-      const { data } = await axios.post("/bookings", {
-        checkIn,
-        checkOut,
-        guestNumber,
-        name,
-        mobile,
-        place: singlePlace._id,
-        price,
-      });
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/bookings`,
+        {
+          checkIn,
+          checkOut,
+          guestNumber,
+          name,
+          mobile,
+          place: singlePlace._id,
+          price,
+        }
+      );
 
       if (data) {
         navigate("/account/bookings");

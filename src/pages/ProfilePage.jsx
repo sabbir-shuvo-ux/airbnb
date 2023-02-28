@@ -10,7 +10,7 @@ const ProfilePage = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("/logout");
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/logout`);
       setUser(null);
       window.localStorage.removeItem("regUser");
       navigate("/");

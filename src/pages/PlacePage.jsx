@@ -14,7 +14,7 @@ const PlacePage = () => {
     if (!id) return;
 
     axios
-      .get(`/places/${id}`)
+      .get(`${import.meta.env.VITE_BASE_URL}/places/${id}`)
       .then((res) => {
         setSinglePlace(res.data);
       })

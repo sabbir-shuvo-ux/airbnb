@@ -7,7 +7,7 @@ const BookingLIst = () => {
   const [bookings, setBookings] = useState([]);
   useEffect(() => {
     axios
-      .get("/bookings")
+      .get(`${import.meta.env.VITE_BASE_URL}/bookings`)
       .then(({ data }) => {
         setBookings(data);
       })

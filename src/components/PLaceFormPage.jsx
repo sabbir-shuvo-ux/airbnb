@@ -23,7 +23,7 @@ const PLaceFormPage = () => {
     if (!id) return;
 
     axios
-      .get(`/places/${id}`)
+      .get(`${import.meta.env.VITE_BASE_URL}/places/${id}`)
       .then((res) => {
         const { data } = res;
         setTitle(data.title);
@@ -94,7 +94,7 @@ const PLaceFormPage = () => {
     if (id) {
       // update place
       try {
-        await axios.put("/places", {
+        await axios.put(`${import.meta.env.VITE_BASE_URL}/places`, {
           id,
           ...placeDatas,
         });
@@ -105,7 +105,7 @@ const PLaceFormPage = () => {
     } else {
       // create place
       try {
-        await axios.post("places", placeDatas);
+        await axios.post(`${import.meta.env.VITE_BASE_URL}/places`, placeDatas);
         navigate("/account/places");
         setAddedPhotos([]);
         setTitle("");

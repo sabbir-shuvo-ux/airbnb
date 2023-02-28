@@ -14,10 +14,13 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("/login", {
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/login`,
+        {
+          email,
+          password,
+        }
+      );
 
       if (data) {
         setUser(data);

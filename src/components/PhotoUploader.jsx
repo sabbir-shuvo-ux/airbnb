@@ -8,9 +8,12 @@ const PhotoUploader = ({ addedPhotos, setAddedPhotos }) => {
     e.preventDefault();
 
     try {
-      const { data: filename } = await axios.post("/upload-by-link", {
-        link: photoLink,
-      });
+      const { data: filename } = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/upload-by-link`,
+        {
+          link: photoLink,
+        }
+      );
 
       setAddedPhotos((prev) => {
         return [...prev, filename];
@@ -31,7 +34,7 @@ const PhotoUploader = ({ addedPhotos, setAddedPhotos }) => {
     }
 
     axios
-      .post("/upload", data, {
+      .post(`${import.meta.env.VITE_BASE_URL}/upload`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -14,11 +14,14 @@ const RegisterPage = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("/register", {
-        name,
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/register`,
+        {
+          name,
+          email,
+          password,
+        }
+      );
 
       if (data) {
         navigate("/login");

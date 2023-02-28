@@ -10,7 +10,7 @@ export const UserContextProvider = ({ children }) => {
   useEffect(() => {
     if (!user) {
       axios
-        .get("/profile")
+        .get(`${import.meta.env.VITE_BASE_URL}/profile`)
         .then(({ data }) => {
           setUser(data);
           setReady(true);

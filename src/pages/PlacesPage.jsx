@@ -8,7 +8,9 @@ const PlaceBtn = () => {
   const [allPlaces, setAllPlaces] = useState([]);
   const getPlaces = async () => {
     try {
-      const { data } = await axios.get("/places");
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/places`
+      );
       setAllPlaces(data);
     } catch (err) {
       console.log(err);

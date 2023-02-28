@@ -7,7 +7,9 @@ const IndexPage = () => {
 
   const handleAllPlace = async () => {
     try {
-      const { data } = await axios.get("/all-place");
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/all-place`
+      );
       setAllPlaces(data);
     } catch (err) {
       console.log(err);
