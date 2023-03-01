@@ -3,6 +3,7 @@ import { differenceInCalendarDays } from "date-fns";
 import axios from "axios";
 import { GlobalUserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const BookingWedget = ({ singlePlace }) => {
   const [checkIn, setCheckIn] = useState("");
@@ -33,7 +34,12 @@ const BookingWedget = ({ singlePlace }) => {
     try {
       const price = numberOfNight * singlePlace.price;
 
-      if (!user) return;
+      if (!user) {
+        toast.error("Please login first", {
+          position: "top-center",
+        });
+        return;
+      }
 
       const { data } = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/bookings`,
