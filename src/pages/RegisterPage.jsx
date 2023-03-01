@@ -2,18 +2,25 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loader, setLoader] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!name || !email || !password) {
+      return;
+    }
     try {
+      setLoader(true);
       const { data } = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/register`,
         {
@@ -24,9 +31,31 @@ const RegisterPage = () => {
       );
 
       if (data) {
+        toast.success("Registration Sucessfull", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "dark",
+        });
         navigate("/login");
       }
+      setLoader(false);
     } catch (error) {
+      toast.error("Registration faild", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+      });
+      setLoader(false);
       console.log(error.message);
     }
   };
@@ -60,8 +89,11 @@ const RegisterPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="bg-primary text-white p-2 rounded-xl cursor-pointer">
-            Register
+          <button
+            disabled={loader}
+            className="bg-primary text-white p-2 rounded-xl cursor-pointer"
+          >
+            {loader ? <Loader /> : "Register"}
           </button>
           <div className="text-gray-400">
             Already have an account yet?{" "}

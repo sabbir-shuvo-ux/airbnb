@@ -4,6 +4,7 @@ import Perks from "./Perks";
 import PhotoUploader from "./PhotoUploader";
 import axios from "axios";
 import AccountNav from "./AccountNav";
+import Loader from "../components/Loader";
 
 const PLaceFormPage = () => {
   const [title, setTitle] = useState("");
@@ -16,6 +17,8 @@ const PLaceFormPage = () => {
   const [checkOut, setCheckOut] = useState("");
   const [maxGuest, setMaxGuest] = useState(1);
   const [price, setPrice] = useState(100);
+
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -93,6 +96,7 @@ const PLaceFormPage = () => {
 
     if (id) {
       // update place
+      setLoader(true);
       try {
         await axios.put(`${import.meta.env.VITE_BASE_URL}/places`, {
           id,
@@ -102,8 +106,10 @@ const PLaceFormPage = () => {
       } catch (err) {
         console.log(err);
       }
+      setLoader(false);
     } else {
       // create place
+      setLoader(true);
       try {
         await axios.post(`${import.meta.env.VITE_BASE_URL}/places`, placeDatas);
         navigate("/account/places");
@@ -120,6 +126,7 @@ const PLaceFormPage = () => {
       } catch (err) {
         console.log(err);
       }
+      setLoader(false);
     }
   };
 
@@ -219,22 +226,31 @@ const PLaceFormPage = () => {
               />
             </div>
           </div>
-          <button className="bg-primary w-full rounded-xl my-4 py-2 text-white inline-flex justify-center items-center gap-2">
-            Save
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-4 h-4 relative top-[1px]"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-              />
-            </svg>
+          <button
+            disabled={loader}
+            className="bg-primary w-full rounded-xl my-4 py-2 text-white inline-flex justify-center items-center gap-2"
+          >
+            {loader ? (
+              <Loader />
+            ) : (
+              <>
+                Save
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-4 h-4 relative top-[1px]"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+                  />
+                </svg>
+              </>
+            )}
           </button>
         </form>
       </div>

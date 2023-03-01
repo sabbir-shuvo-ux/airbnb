@@ -2,18 +2,24 @@ import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { GlobalUserContext } from "../context/UserContext";
+import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const { setUser, setReady } = GlobalUserContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!email && !password) {
+      return;
+    }
     try {
+      setLoader(true);
       const { data } = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/login`,
         {
@@ -25,13 +31,33 @@ const LoginPage = () => {
       if (data) {
         setUser(data);
         setReady(true);
-        alert("Login Successfull");
         window.localStorage.setItem("regUser", email);
       }
       setRedirect(true);
+      toast.success("Login Sucessfull", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+      });
+      setLoader(false);
     } catch (err) {
+      setLoader(false);
       console.log(err);
-      alert("Something worng");
+      toast.error("Login Faild", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -61,8 +87,11 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          <button className="bg-primary text-white p-2 rounded-xl cursor-pointer">
-            Login
+          <button
+            disabled={loader}
+            className="bg-primary text-white p-2 rounded-xl cursor-pointer"
+          >
+            {loader ? <Loader /> : "Login"}
           </button>
           <div className="text-gray-400">
             Don't have an account yet?{" "}
