@@ -25,18 +25,14 @@ const CardPlace = ({ givenData, path }) => {
                   ? item.place?.photos?.length > 0 && (
                       <img
                         className="h-full w-full object-cover"
-                        src={`${import.meta.env.VITE_IMG_LINK}${
-                          item.place.photos[0]
-                        }`}
+                        src={item.place.photos[0]}
                         alt={item.title}
                       />
                     )
                   : item.photos?.length > 0 && (
                       <img
                         className="h-full w-full object-cover"
-                        src={`${import.meta.env.VITE_IMG_LINK}${
-                          item.photos[0]
-                        }`}
+                        src={item.photos[0]}
                         alt={item.title}
                       />
                     )}

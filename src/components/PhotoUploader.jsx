@@ -101,7 +101,7 @@ const PhotoUploader = ({ addedPhotos, setAddedPhotos }) => {
             <div className="h-32 relative" key={item}>
               <img
                 className="rounded-2xl w-full h-full object-cover"
-                src={`${import.meta.env.VITE_IMG_LINK}${item}`}
+                src={item}
               />
               <button
                 onClick={(e) => removePhoto(e, item)}

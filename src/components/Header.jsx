@@ -25,7 +25,7 @@ const Header = () => {
         <span className="font-bold text-xl">airbnb</span>
       </Link>
 
-      <div className="flex gap-2 rounded-full px-4 py-2 border shadow hover:shadow-md border-gray-300">
+      <div className="gap-2 rounded-full hidden sm:flex px-4 py-2 border shadow hover:shadow-md border-gray-300">
         <div>Anywhere</div>
         <div className="border-l border-gray-300"></div>
         <div>Any week</div>

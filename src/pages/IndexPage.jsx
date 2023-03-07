@@ -49,7 +49,7 @@ const IndexPage = () => {
                   {item.photos.length > 0 && (
                     <img
                       className="rounded-2xl object-cover aspect-square"
-                      src={`${import.meta.env.VITE_IMG_LINK}${item.photos[0]}`}
+                      src={item.photos[0]}
                     />
                   )}
                 </div>

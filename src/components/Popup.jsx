@@ -66,11 +66,7 @@ const Popup = ({
           <h1 className="text-white text-2xl">Photos of {singlePlace.title}</h1>
           {singlePlace.photos?.map((photo) => (
             <div className="w-full">
-              <img
-                className="w-full"
-                src={`${import.meta.env.VITE_IMG_LINK}${photo}`}
-                alt={singlePlace._id}
-              />
+              <img className="w-full" src={photo} alt={singlePlace._id} />
             </div>
           ))}
         </div>

@@ -99,9 +99,7 @@ const PlacePage = () => {
                 <img
                   onClick={openAllPhotos}
                   className="aspect-square object-cover h-full w-full cursor-pointer"
-                  src={`${import.meta.env.VITE_IMG_LINK}${
-                    singlePlace.photos?.[0]
-                  }`}
+                  src={singlePlace.photos?.[0]}
                 />
               </div>
             )}
@@ -111,9 +109,7 @@ const PlacePage = () => {
               <img
                 onClick={openAllPhotos}
                 className="object-cover aspect-square h-full cursor-pointer w-full"
-                src={`${import.meta.env.VITE_IMG_LINK}${
-                  singlePlace.photos?.[1]
-                }`}
+                src={singlePlace.photos?.[1]}
               />
             )}
             <div className="overflow-hidden">
@@ -121,9 +117,7 @@ const PlacePage = () => {
                 <img
                   onClick={openAllPhotos}
                   className="relative top-2 object-cover aspect-square cursor-pointer h-full w-full"
-                  src={`${import.meta.env.VITE_IMG_LINK}${
-                    singlePlace.photos?.[2]
-                  }`}
+                  src={singlePlace.photos?.[2]}
                 />
               )}
             </div>
